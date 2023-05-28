@@ -71,7 +71,7 @@ module SamlRequestMacros
       config.name_id.formats = SamlIdp::Default::NAME_ID_FORMAT
       config.service_provider = lambda { |_identifier, _service_provider|
         raw_metadata = generate_sp_metadata(saml_acs_url, enable_secure_options)
-        SamlIdp::IncomingMetadata.new(raw_metadata).to_h
+        SamlIdp::SpMetadata.new(raw_metadata).to_h
       }
       config.service_provider.finder = lambda { |_issuer_or_entity_id|
         {

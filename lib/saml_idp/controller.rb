@@ -140,5 +140,17 @@ module SamlIdp
     def default_algorithm
       OpenSSL::Digest::SHA256
     end
+
+    def sp_config
+      @sp_config ||= SamlIdp::SpConfig.new
+    end
+
+    def configure
+      yield sp_config
+    end
+
+    def idp_metadata
+      @idp_metadata ||= MetadataBuilder.new(sp_config)
+    end
   end
 end
