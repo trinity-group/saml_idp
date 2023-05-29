@@ -10,10 +10,6 @@ module SamlIdp
   require 'saml_idp/version'
   require 'saml_idp/fingerprint'
   require 'saml_idp/engine' if defined?(::Rails)
-
-  def self.metadata
-    @metadata ||= MetadataBuilder.new(config)
-  end
 end
 
 # TODO Needs extraction out
