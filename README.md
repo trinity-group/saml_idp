@@ -44,10 +44,19 @@ Please check `configure` section for your controller
 
 Your application need to manage 2 things for configuration.
 1. IdP data such as IdP certificate and other configs
+   For this configuration you have to create global initialization file in your application
+   Which do following configuration.
+
+   ```ruby
+    SamlIdP.config do
+      config.logger = ::Logger.new($stdout)                         # Default: if in Rails context - Rails.logger, else ->(msg) { puts msg }. Works with either a Ruby Logger or a lambda
+    end
+   ```
+
 2. SP data such 
 
 ```ruby
-  configure do |config|
+  configure_sp do |config|
     base = "http://example.com"
 
     config.x509_certificate = <<-CERT
@@ -75,7 +84,6 @@ Your application need to manage 2 things for configuration.
   config.session_expiry = 86400                                 # Default: 0 which means never
   config.signed_assertion = false                               # Default: true which means signed assertions on the SAML Response
   config.compress = true                                        # Default: false which means the SAML Response is not being compressed
-  config.logger = ::Logger.new($stdout)                         # Default: if in Rails context - Rails.logger, else ->(msg) { puts msg }. Works with either a Ruby Logger or a lambda
 
   Principal (e.g. User) is passed in when you `encode_response`
   

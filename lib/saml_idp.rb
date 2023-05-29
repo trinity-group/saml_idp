@@ -10,6 +10,14 @@ module SamlIdp
   require 'saml_idp/version'
   require 'saml_idp/fingerprint'
   require 'saml_idp/engine' if defined?(::Rails)
+
+  def self.saml_idp_global_config
+    @saml_idp_global_config ||= OpenStruct.new(logger: ::Logger.new($stdout))
+  end
+
+  def self.config
+    yield saml_idp_global_config
+  end
 end
 
 # TODO Needs extraction out

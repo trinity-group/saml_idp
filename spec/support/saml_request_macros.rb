@@ -56,6 +56,7 @@ module SamlRequestMacros
   end
 
   def configure_for_sp(config)
+    config ||= SamlIdp::SpConfig.new
     config.x509_certificate = SamlIdp::Default::X509_CERTIFICATE
     config.secret_key = SamlIdp::Default::SECRET_KEY
     config.password = nil
@@ -80,6 +81,7 @@ module SamlRequestMacros
         fingerprint: SamlIdp::Fingerprint.certificate_digest(sp_x509_cert)
       }
     }
+    config
   end
 
   def print_pretty_xml(xml_string)

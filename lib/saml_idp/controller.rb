@@ -67,6 +67,7 @@ module SamlIdp
       compress_opts = opts[:compress] || false
 
       SamlResponse.new(
+        sp_config,
         reference_id,
         response_id,
         opt_issuer_uri,
@@ -145,7 +146,7 @@ module SamlIdp
       @sp_config ||= SamlIdp::SpConfig.new
     end
 
-    def configure
+    def configure_sp
       yield sp_config
     end
 

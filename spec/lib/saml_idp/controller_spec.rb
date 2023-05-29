@@ -23,9 +23,7 @@ describe SamlIdp::Controller do
 
   context "When SP metadata required to validate auth request signature" do
     before do
-      configure do |config|
-        configure_for_sp(config)
-      end
+      configure_for_sp
       params[:SAMLRequest] = make_saml_request("https://foo.example.com/saml/consume", true)
     end
 
