@@ -33,7 +33,9 @@ module SamlIdp
     end
 
     def validate_saml_request(raw_saml_request = params[:SAMLRequest])
+      p "validate_saml_request " * 100
       decode_request(raw_saml_request)
+      p @saml_request
       return true if valid_saml_request?
 
       head :forbidden if defined?(::Rails)
